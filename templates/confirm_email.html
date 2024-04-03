@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Confirm Email </title>
+    <link rel="stylesheet" href="{% static 'style_login_register.css' %}">
+</head>
+<body>
+<div class="wrapper">
+    <h2>Confirm Your Email</h2>
+    <p>Code sent to your {{ email }}. Please check it!</p>
+    <form action="{% url 'register_user' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="email" value="{{ email }}">
+        <input type="hidden" name="password" value="{{ password }}">
+
+        <div class="input-box">
+            <input type="number" name="code" value="{{ code }}" placeholder="enter confirmed code" required>
+        </div>
+        <div>
+            <p style="color: red">{{ code_error }}</p>
+        </div>
+        <div class="input-box button">
+            <input type="Submit" value="Confirm">
+        </div>
+        <div class="text">
+            <h3>Back to Register <a href="#">Register page</a></h3>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
